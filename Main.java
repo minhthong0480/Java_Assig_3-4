@@ -27,7 +27,13 @@ class StudentEnrolment{
     public Course course;
     public String semester;
 
+    public StudentEnrolment(Student student, Course course, String semester){
+        this.student = student;
+        this.course = course;
+        this.semester = semester;
+    }
 }
+
 public class Main {
     public static void main(String[] args) {
 
