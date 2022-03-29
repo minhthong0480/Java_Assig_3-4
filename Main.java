@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class Student{
     public String StudentID;
     public String StudentName;
@@ -36,6 +38,8 @@ class StudentEnrolment{
 
 public class Main {
     public static void main(String[] args) {
-
+        Enrolmanager enrolment = new Enrolmanager();
+        //ArrayList studentlist = new ArrayList<>();
+        System.out.println(enrolment.studentList);
     }
 }
