@@ -11,7 +11,7 @@ public class Main {
         for(Course c: enrolment.getCourseList())
             System.out.println(c);
 
-        enrolment.getAll();
+        enrolment.update();
 
     }
 }
