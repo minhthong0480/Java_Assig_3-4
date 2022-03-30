@@ -123,6 +123,67 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 }
             }
         }while (c == null);
+
+        String sem;
+        do{
+            System.out.println("Enter semester: ");
+            sem = scanner.nextLine();
+        }while(sem == null);
+
+        for(StudentEnrolment se: studentEnrolmentList){
+            if(se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
+                se.getCourse().getCourseID().equalsIgnoreCase(c.getCourseID()) &&
+                se.getSemester().equalsIgnoreCase(sem)){
+                System.out.println("Already enrolled");
+                return;
+            }
+        }
+        studentEnrolmentList.add(new StudentEnrolment(s,c,sem));
+        System.out.println("Enroll succesfully");
+    }
+
+    @Override
+    public void delete() {
+        Student s = null;
+        do {
+            System.out.println("Enter studentID: ");
+            String studentID = scanner.nextLine();
+            for (Student student : studentList) {
+                if (studentID.equalsIgnoreCase(student.getStudentID())) {
+                    s = student;
+                    //System.out.println(s.getStudentName());
+                }
+            }
+        } while (s == null);
+
+        Course c = null;
+        do{
+            System.out.println("Enter CourseID: ");
+            String courseID = scanner.nextLine();
+            for (Course course : courseList){
+                if (courseID.equalsIgnoreCase(course.getCourseID())){
+                    c = course;
+                    System.out.println(c.getCourseName());
+                }
+            }
+        }while (c == null);
+
+        String sem;
+        do{
+            System.out.println("Enter semester: ");
+            sem = scanner.nextLine();
+        }while(sem == null);
+
+        for(StudentEnrolment se: studentEnrolmentList){
+            if(se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
+                    se.getCourse().getCourseID().equalsIgnoreCase(c.getCourseID()) &&
+                    se.getSemester().equalsIgnoreCase(sem)){
+                studentEnrolmentList.remove(se);
+                System.out.println("Delete successfully!!");
+                return;
+            }
+        }
+        System.out.println("Data does not exist");
     }
 
     @Override
@@ -131,17 +192,53 @@ public class Enrolmanager implements StudentEnrolmentManager {
     }
 
     @Override
-    public void delete() {
-
-    }
-
-    @Override
     public void getOne() {
+        Student s = null;
+        do {
+            System.out.println("Enter studentID: ");
+            String studentID = scanner.nextLine();
+            for (Student student : studentList) {
+                if (studentID.equalsIgnoreCase(student.getStudentID())) {
+                    s = student;
+                    //System.out.println(s.getStudentName());
+                }
+            }
+        } while (s == null);
 
+        Course c = null;
+        do{
+            System.out.println("Enter CourseID: ");
+            String courseID = scanner.nextLine();
+            for (Course course : courseList){
+                if (courseID.equalsIgnoreCase(course.getCourseID())){
+                    c = course;
+                    System.out.println(c.getCourseName());
+                }
+            }
+        }while (c == null);
+
+        String sem;
+        do{
+            System.out.println("Enter semester: ");
+            sem = scanner.nextLine();
+        }while(sem == null);
+
+        for(StudentEnrolment se: studentEnrolmentList){
+            if(se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
+                    se.getCourse().getCourseID().equalsIgnoreCase(c.getCourseID()) &&
+                    se.getSemester().equalsIgnoreCase(sem)){
+                System.out.println("====> "+se);
+                return;
+            }
+        }
+        System.out.println("Data does not exist");
     }
 
     @Override
     public void getAll() {
-
+        System.out.println("List of Enrolment: ");
+        for(StudentEnrolment se : studentEnrolmentList){
+            System.out.println(se);
+        }
     }
 }

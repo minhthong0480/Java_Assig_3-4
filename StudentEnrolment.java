@@ -32,4 +32,9 @@ class StudentEnrolment{
         this.course = course;
         this.semester = semester;
     }
+
+    @Override
+    public String toString(){
+        return student.toString() + course.toString() + semester;
+    }
 }
