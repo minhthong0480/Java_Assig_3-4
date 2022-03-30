@@ -190,7 +190,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
     public void getOne() {
         Student s = null;
         do {
-            System.out.println("Enter studentID: ");
+            System.out.print("Enter studentID: ");
             String studentID = scanner.nextLine();
             for (Student student : studentList) {
                 if (studentID.equalsIgnoreCase(student.getStudentID())) {
@@ -202,7 +202,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
 
         Course c = null;
         do{
-            System.out.println("Enter CourseID: ");
+            System.out.print("Enter CourseID: ");
             String courseID = scanner.nextLine();
             for (Course course : courseList){
                 if (courseID.equalsIgnoreCase(course.getCourseID())){
@@ -214,7 +214,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
 
         String sem;
         do{
-            System.out.println("Enter semester: ");
+            System.out.print("Enter semester: ");
             sem = scanner.nextLine();
         }while(sem == null);
 
@@ -271,7 +271,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
         System.out.println("What do you want to do: ");
         System.out.println("Option 1: Add Course ");
         System.out.println("Option 2: Delete ");
-        System.out.println("Enter (1) or (2): ");
+        System.out.print("Enter (1) or (2): ");
         String option = scanner.nextLine();
 
         Course c = null;
