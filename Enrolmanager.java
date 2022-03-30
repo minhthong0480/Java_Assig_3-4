@@ -7,6 +7,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
     private ArrayList<Course> courseList = new ArrayList<>();
     private ArrayList<StudentEnrolment> studentEnrolmentList = new ArrayList<>();
 
+    Scanner scanner = new Scanner(System.in);
     public ArrayList<Student> getStudentList() {
         return studentList;
     }
@@ -34,17 +35,17 @@ public class Enrolmanager implements StudentEnrolmentManager {
     //String path ="/Users/thongnguyen/Documents/GitHub/Java_Assig_3-4/default.csv";
 
     public void importFile(String fileName) throws FileNotFoundException {
-        Scanner scanner;
+        Scanner sc;
         try{
-            scanner = new Scanner(new File(fileName));
+            sc = new Scanner(new File(fileName));
         }
         catch (FileNotFoundException e) {
             //e.printStackTrace();
             System.out.println("File not found");
-            scanner = new Scanner(new File(fileName));
+            sc = new Scanner(new File(fileName));
         }
-        while(scanner.hasNextLine()){
-            String line = scanner.nextLine();
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
             String [] values = line.split(",");
             Student stu = new Student(values[0], values[1], values[2]);
             Course cou = new Course(values[3], values[4],Integer.parseInt(values[5]));
@@ -88,7 +89,40 @@ public class Enrolmanager implements StudentEnrolmentManager {
 
     @Override
     public void add() {
+//        Scanner addstudent = new Scanner(System.in);
+//        System.out.println("Enter new studentID: ");
+//        String newStudentID = addstudent.nextLine();
+//        Student s;
+//        for (Student student : studentList){
+//            if(newStudentID.equalsIgnoreCase(student.getStudentID())){
+//                s = student;
+//            } else{
+//
+//            }
+//        }
+        Student s = null;
+        do {
+            System.out.println("Enter studentID: ");
+            String studentID = scanner.nextLine();
+            for (Student student : studentList) {
+                if (studentID.equalsIgnoreCase(student.getStudentID())) {
+                    s = student;
+                    //System.out.println(s.getStudentName());
+                }
+            }
+        } while (s == null);
 
+        Course c = null;
+        do{
+            System.out.println("Enter CourseID: ");
+            String courseID = scanner.nextLine();
+            for (Course course : courseList){
+                if (courseID.equalsIgnoreCase(course.getCourseID())){
+                    c = course;
+                    System.out.println(c.getCourseName());
+                }
+            }
+        }while (c == null);
     }
 
     @Override
