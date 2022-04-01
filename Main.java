@@ -11,32 +11,9 @@ public class Main {
         for(Course c: enrolment.getCourseList())
             System.out.println(c);
 
-        //enrolment.viewCourse();
+        //enrolmenuestionCourse();
         //enrolment.viewStudent();
-        //enrolment.viewSem();
+        enrolment.viewSem();
 
     }
 }
-
-//    FileWriter file = null;
-//        try {
-//                file = new FileWriter("src/allCouOfferedInSem.csv");
-//                file.append("\n");
-//                Iterator<Course> it = course.iterator();
-//        file.append("All of the course offered in semester " + semester);
-//        while(it.hasNext())
-//        {
-//        Course c = (Course)it.next();
-//        file.append(c.getId());
-//        file.append(",");
-//        file.append(c.getName());
-//        file.append(",");
-//        file.append(String.valueOf(c.getCredits()));
-//        file.append(",");
-//        file.append("\n");
-//        }
-//
-//        file.close();
-//        } catch(Exception e){
-//        e.printStackTrace();
-//        }

@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Iterator;
 
 public class Enrolmanager implements StudentEnrolmentManager {
     private ArrayList<Student> studentList = new ArrayList<>();
@@ -385,8 +386,33 @@ public class Enrolmanager implements StudentEnrolmentManager {
         System.out.println("List of Course in Semester: ");
         for (StudentEnrolment se : studentEnrolmentList) {
             if (se.getSemester().equalsIgnoreCase(sem)) {
-                System.out.println(se.getCourse());
+                    System.out.println(se.getCourse());
+                }
             }
+
+        FileWriter file = null;
+        try {
+            file = new FileWriter("Java_Assig_3-4/Test.csv");
+            file.append("\n");
+            Iterator<Course> printCourseInSem = courseList.iterator();
+            file.append("All of the course in semester \n" + sem);
+            while(printCourseInSem.hasNext())
+            {
+                Course c = (Course)printCourseInSem.next();
+                file.append(c.getCourseID());
+                file.append(",");
+                file.append(c.getCourseName());
+                file.append(",");
+                file.append(String.valueOf(c.getNumberofCredit()));
+                file.append(",");
+                file.append("\n");
+                file.append("");
+            }
+
+            file.close();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
+
 }
