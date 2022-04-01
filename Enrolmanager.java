@@ -342,6 +342,30 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 System.out.println(se.getCourse());
             }
         }
+//write to csv all course for 1 student
+        FileWriter file = null;
+        try {
+            file = new FileWriter("Java_Assig_3-4/Test.csv");
+            file.append("\n");
+            Iterator<Course> printCourseforStudent = courseList.iterator();
+            file.append("All of the course in semester \n" + sem);
+            while(printCourseforStudent.hasNext())
+            {
+                Course c = (Course)printCourseforStudent.next();
+                file.append(c.getCourseID());
+                file.append(",");
+                file.append(c.getCourseName());
+                file.append(",");
+                file.append(String.valueOf(c.getNumberofCredit()));
+                file.append(",");
+                file.append("\n");
+                file.append("");
+            }
+
+            file.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void viewStudent(){
@@ -372,6 +396,30 @@ public class Enrolmanager implements StudentEnrolmentManager {
                     se.getSemester().equalsIgnoreCase(sem)){
                 System.out.println(se.getStudent());
             }
+        }
+
+        FileWriter file = null;
+        try {
+            file = new FileWriter("Java_Assig_3-4/Test.csv");
+            file.append("\n");
+            Iterator<Student> printStudentofOneCourse = studentList.iterator();
+            file.append("All of the course in semester \n" + sem);
+            while(printStudentofOneCourse.hasNext())
+            {
+                Student s = (Student)printStudentofOneCourse.next();
+                file.append(s.getStudentID());
+                file.append(",");
+                file.append(s.getStudentName());
+                file.append(",");
+                file.append(String.valueOf(s.getBirthDate()));
+                file.append(",");
+                file.append("\n");
+                file.append("");
+            }
+
+            file.close();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 
