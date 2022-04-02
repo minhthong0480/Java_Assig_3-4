@@ -6,6 +6,7 @@ public class Main {
         Enrolmanager enrolment = new Enrolmanager();
         //ArrayList studentlist = new ArrayList<>();
         enrolment.importFile("default.csv");
+
 //        for(Student s: enrolment.getStudentList())
 //            System.out.println(s);
 //        for(Course c: enrolment.getCourseList())
@@ -17,3 +18,4 @@ public class Main {
 
     }
 }
+

@@ -85,36 +85,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
     }
 
     @Override
-    public void add() {
-        Student s = null;
-        do {
-            System.out.println("Enter studentID: ");
-            String studentID = scanner.nextLine();
-            for (Student student : studentList) {
-                if (studentID.equalsIgnoreCase(student.getStudentID())) {
-                    s = student;
-                    //System.out.println(s.getStudentName());
-                }
-            }
-        } while (s == null);
-
-        Course c = null;
-        do{
-            System.out.println("Enter CourseID: ");
-            String courseID = scanner.nextLine();
-            for (Course course : courseList){
-                if (courseID.equalsIgnoreCase(course.getCourseID())){
-                    c = course;
-                    System.out.println(c.getCourseName());
-                }
-            }
-        }while (c == null);
-
-        String sem;
-        do{
-            System.out.println("Enter semester: ");
-            sem = scanner.nextLine();
-        }while(sem == null);
+    public void add(Student s, Course c, String sem) {
 
         for(StudentEnrolment se: studentEnrolmentList){
             if(se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
@@ -129,36 +100,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
     }
 
     @Override
-    public void delete() {
-        Student s = null;
-        do {
-            System.out.println("Enter studentID: ");
-            String studentID = scanner.nextLine();
-            for (Student student : studentList) {
-                if (studentID.equalsIgnoreCase(student.getStudentID())) {
-                    s = student;
-                    //System.out.println(s.getStudentName());
-                }
-            }
-        } while (s == null);
-
-        Course c = null;
-        do{
-            System.out.println("Enter CourseID: ");
-            String courseID = scanner.nextLine();
-            for (Course course : courseList){
-                if (courseID.equalsIgnoreCase(course.getCourseID())){
-                    c = course;
-                    System.out.println(c.getCourseName());
-                }
-            }
-        }while (c == null);
-
-        String sem;
-        do{
-            System.out.println("Enter semester: ");
-            sem = scanner.nextLine();
-        }while(sem == null);
+    public void delete(Student s, Course c, String sem) {
 
         for(StudentEnrolment se: studentEnrolmentList){
             if(se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
@@ -173,36 +115,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
     }
 
     @Override
-    public void getOne() {
-        Student s = null;
-        do {
-            System.out.print("Enter studentID: ");
-            String studentID = scanner.nextLine();
-            for (Student student : studentList) {
-                if (studentID.equalsIgnoreCase(student.getStudentID())) {
-                    s = student;
-                    //System.out.println(s.getStudentName());
-                }
-            }
-        } while (s == null);
-
-        Course c = null;
-        do{
-            System.out.print("Enter CourseID: ");
-            String courseID = scanner.nextLine();
-            for (Course course : courseList){
-                if (courseID.equalsIgnoreCase(course.getCourseID())){
-                    c = course;
-                    System.out.println(c.getCourseName());
-                }
-            }
-        }while (c == null);
-
-        String sem;
-        do{
-            System.out.print("Enter semester: ");
-            sem = scanner.nextLine();
-        }while(sem == null);
+    public void getOne(Student s, Course c, String sem) {
 
         for(StudentEnrolment se: studentEnrolmentList){
             if(se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
@@ -224,115 +137,19 @@ public class Enrolmanager implements StudentEnrolmentManager {
     }
 
     @Override
-    public void update() {
-        Student s = null;
-        boolean check = false;
-        do {
-            System.out.println("Enter studentID: ");
-            String studentID = scanner.nextLine();
-            //check if is there any student match data
-            for (Student student : studentList) {
-                if (studentID.equalsIgnoreCase(student.getStudentID())) {
-                    s = student;
-                    //System.out.println(s.getStudentName());
-                }
-            }
-        } while (s == null);
-
-        String sem;
-        do {
-            System.out.println("Enter semester: ");
-            sem = scanner.nextLine();
-        } while (sem == null);
-
-        for (StudentEnrolment se : studentEnrolmentList) {
-            if (se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
-                    se.getSemester().equalsIgnoreCase(sem)) {
-                System.out.println(se.getCourse());
-                check = true;
-            }
-        }
-        if (!check)
-            System.out.println("==> No match data.");
-
-        System.out.println("What do you want to do: ");
-        System.out.println("Option 1: Add Course ");
-        System.out.println("Option 2: Delete ");
-        System.out.print("Enter (1) or (2): ");
-        String option = scanner.nextLine();
-
-        Course c = null;
-        switch (option) {
+    public void update(Student s, Course c, String sem, String opt) {
+        switch(opt){
             case "1" -> {
-                do {
-                    System.out.println("Enter CourseID: ");
-                    String courseID = scanner.nextLine();
-                    for (Course course : courseList) {
-                        if (courseID.equalsIgnoreCase(course.getCourseID())) {
-                            c = course;
-                            System.out.println(c.getCourseName());
-                        }
-                    }
-                } while (c == null);
-                //check entered course
-                for (StudentEnrolment se : studentEnrolmentList) {
-                    if (se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
-                            se.getSemester().equalsIgnoreCase(sem) &&
-                            se.getCourse().getCourseID().equalsIgnoreCase(c.getCourseID())) {
-                        System.out.println("Already enrolled");
-                        return;
-                    }
-                }
-                //add new data
-                studentEnrolmentList.add(new StudentEnrolment(s, c, sem));
-                System.out.println("Enroll succesfully");
+                add(s,c,sem);
             }
             case "2" -> {
-                do {
-                    System.out.println("Enter CourseID: ");
-                    String courseID = scanner.nextLine();
-                    for (Course course : courseList) {
-                        if (courseID.equalsIgnoreCase(course.getCourseID())) {
-                            c = course;
-                            System.out.println(c.getCourseName());
-                        }
-                    }
-                } while (c == null);
-                for (StudentEnrolment se : studentEnrolmentList) {
-                    if (se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
-                            se.getSemester().equalsIgnoreCase(sem) &&
-                            se.getCourse().getCourseID().equalsIgnoreCase(c.getCourseID())) {
-                        studentEnrolmentList.remove(se);
-                        System.out.println("Delete successfully!!");
-                        return;
-                    }
-                }
-                System.out.println("Data does not exist");
+                delete(s,c,sem);
             }
         }
     }
 
     //view all course for 1 student
-    public void viewCourse(){
-        //input student data
-        Student s = null;
-        do {
-            System.out.print("Enter studentID: ");
-            String studentID = scanner.nextLine();
-            for (Student student : studentList) {
-                if (studentID.equalsIgnoreCase(student.getStudentID())) {
-                    s = student;
-                    //System.out.println(s.getStudentName());
-                }
-            }
-        } while (s == null);
-
-        //input semester data
-        String sem;
-        do{
-            System.out.print("Enter semester: ");
-            sem = scanner.nextLine();
-        }while(sem == null);
+    public void viewCourse(Student s, String sem){
 
         //print all course for input student
         System.out.println("List of Course: ");
@@ -342,7 +159,8 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 System.out.println(se.getCourse());
             }
         }
-//write to csv all course for 1 student
+
+        //write to csv all course for 1 student
         FileWriter file = null;
         try {
             file = new FileWriter("Java_Assig_3-4/Test.csv");
@@ -368,26 +186,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
         }
     }
 
-    public void viewStudent(){
-        //input course data
-        Course c = null;
-        do{
-            System.out.print("Enter CourseID: ");
-            String courseID = scanner.nextLine();
-            for (Course course : courseList){
-                if (courseID.equalsIgnoreCase(course.getCourseID())){
-                    c = course;
-                    System.out.println(c.getCourseName());
-                }
-            }
-        }while (c == null);
-
-        //input semester data
-        String sem;
-        do{
-            System.out.print("Enter semester: ");
-            sem = scanner.nextLine();
-        }while(sem == null);
+    public void viewStudent(Course c, String sem){
 
         //print all student for input course
         System.out.println("List of student: ");
@@ -416,20 +215,13 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 file.append("\n");
                 file.append("");
             }
-
             file.close();
         } catch(Exception e){
             e.printStackTrace();
         }
     }
 
-    public void viewSem() {
-        //input semester data
-        String sem;
-        do {
-            System.out.print("Enter semester: ");
-            sem = scanner.nextLine();
-        } while (sem == null);
+    public void viewSem(String sem) {
 
         System.out.println("List of Course in Semester: ");
         for (StudentEnrolment se : studentEnrolmentList) {
@@ -438,6 +230,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 }
             }
 
+//write all course in one semester
         FileWriter file = null;
         try {
             file = new FileWriter("Java_Assig_3-4/Test.csv");
@@ -455,6 +248,7 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 file.append(",");
                 file.append("\n");
                 file.append("");
+
             }
 
             file.close();
