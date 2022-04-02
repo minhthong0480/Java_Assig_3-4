@@ -1,17 +1,22 @@
+import java.io.FileNotFoundException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
     public Menu() {
     }
 
-    public void createMenu(){
+    public void createMenu() throws FileNotFoundException {
         Student s = null;
         Course c = null;
-        String stuID, courID, sem, opt, opt1, opt2;
+        String studentID,courseID,sem, opt;
 
         Enrolmanager enroll = new Enrolmanager();
 
         Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter your file's name: ");
+        enroll.importFile(input.nextLine());
 
         do {
 
@@ -39,10 +44,9 @@ public class Menu {
                     && (Integer.parseInt(opt) <= 9)) {
                 switch (opt) {
                     case "1": // Enroll
-
                         do {
                             System.out.println("Enter studentID: ");
-                            String studentID = input.nextLine();
+                            studentID = input.nextLine();
                             for (Student student : enroll.getStudentList()) {
                                 if (studentID.equalsIgnoreCase(student.getStudentID())) {
                                     s = student;
@@ -53,11 +57,11 @@ public class Menu {
 
                         do {
                             System.out.println("Enter CourseID: ");
-                            String courseID = input.nextLine();
+                            courseID = input.nextLine().toUpperCase();
                             for (Course course : enroll.getCourseList()) {
                                 if (courseID.equalsIgnoreCase(course.getCourseID())) {
                                     c = course;
-                                    System.out.println(c.getCourseName());
+                                    //System.out.println(c.getCourseName());
                                 }
                             }
                         } while (c == null);
@@ -68,6 +72,7 @@ public class Menu {
                         } while (sem == null);
 
                         enroll.add(s,c,sem);
+                        enroll.getAll();
                         break;
 
                     case "2": // Update
@@ -75,7 +80,7 @@ public class Menu {
                         boolean check = false;
                         do {
                             System.out.println("Enter studentID: ");
-                            String studentID = input.nextLine();
+                            studentID = input.nextLine();
                             //check if is there any student match data
                             for (Student student : enroll.getStudentList()) {
                                 if (studentID.equalsIgnoreCase(student.getStudentID())) {
@@ -110,7 +115,7 @@ public class Menu {
                             case "1" -> {
                                 do {
                                     System.out.println("Enter CourseID: ");
-                                    String courseID = input.nextLine();
+                                    courseID = input.nextLine();
                                     for (Course course : enroll.getCourseList()) {
                                         if (courseID.equalsIgnoreCase(course.getCourseID())) {
                                             c = course;
@@ -132,11 +137,12 @@ public class Menu {
                                 //add new data
                                 enroll.getStudentEnrolmentList().add(new StudentEnrolment(s, c, sem));
                                 System.out.println("Enroll succesfully");
+                                break;
                             }
                             case "2" -> {
                                 do {
                                     System.out.println("Enter CourseID: ");
-                                    String courseID = input.nextLine();
+                                    courseID = input.nextLine();
                                     for (Course course : enroll.getCourseList()) {
                                         if (courseID.equalsIgnoreCase(course.getCourseID())) {
                                             c = course;
@@ -154,12 +160,13 @@ public class Menu {
                                     }
                                 }
                                 System.out.println("Data does not exist");
+                                break;
                             }
                         }
                     case "3": // Delete
                         do {
                             System.out.println("Enter studentID: ");
-                            String studentID = input.nextLine();
+                            studentID = input.nextLine();
                             for (Student student : enroll.getStudentList()) {
                                 if (studentID.equalsIgnoreCase(student.getStudentID())) {
                                     s = student;
@@ -170,7 +177,7 @@ public class Menu {
 
                         do{
                             System.out.println("Enter CourseID: ");
-                            String courseID = input.nextLine();
+                            courseID = input.nextLine();
                             for (Course course : enroll.getCourseList()){
                                 if (courseID.equalsIgnoreCase(course.getCourseID())){
                                     c = course;
@@ -190,7 +197,7 @@ public class Menu {
                     case "4": //get one
                         do {
                             System.out.print("Enter studentID: ");
-                            String studentID = input.nextLine();
+                            studentID = input.nextLine();
                             for (Student student : enroll.getStudentList()) {
                                 if (studentID.equalsIgnoreCase(student.getStudentID())) {
                                     s = student;
@@ -201,7 +208,7 @@ public class Menu {
 
                         do{
                             System.out.print("Enter CourseID: ");
-                            String courseID = input.nextLine();
+                            courseID = input.nextLine();
                             for (Course course : enroll.getCourseList()){
                                 if (courseID.equalsIgnoreCase(course.getCourseID())){
                                     c = course;
@@ -225,7 +232,7 @@ public class Menu {
                     case "6":
                         do {
                             System.out.print("Enter studentID: ");
-                            String studentID = input.nextLine();
+                            studentID = input.nextLine();
                             for (Student student : enroll.getStudentList()) {
                                 if (studentID.equalsIgnoreCase(student.getStudentID())) {
                                     s = student;
@@ -246,7 +253,7 @@ public class Menu {
                     case "7":
                         do{
                             System.out.print("Enter CourseID: ");
-                            String courseID = input.nextLine();
+                            courseID = input.nextLine();
                             for (Course course : enroll.getCourseList()){
                                 if (courseID.equalsIgnoreCase(course.getCourseID())){
                                     c = course;
@@ -275,6 +282,8 @@ public class Menu {
 
                     case "9":
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + opt);
                 }
             }
 
@@ -283,6 +292,8 @@ public class Menu {
                 System.out.println("Invalid Option!");
                 System.out.println("----------------------------------------------");
             }
-        } while (true);
+        } while (!opt.equals("1") && !opt.equals("2") && !opt.equals("3")
+                && !opt.equals("4") && !opt.equals("5") && !opt.equals("6")
+                && !opt.equals("7") && !opt.equals("8") && !opt.equals("9"));
     }
 }

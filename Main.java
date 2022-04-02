@@ -3,18 +3,21 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Enrolmanager enrolment = new Enrolmanager();
+        Enrolmanager enrollment = new Enrolmanager();
         //ArrayList studentlist = new ArrayList<>();
-        enrolment.importFile("default.csv");
+        enrollment.importFile("default.csv");
 
-//        for(Student s: enrolment.getStudentList())
-//            System.out.println(s);
-//        for(Course c: enrolment.getCourseList())
-//            System.out.println(c);
+        for(Student s: enrollment.getStudentList())
+            System.out.println(s);
+        for(Course c: enrollment.getCourseList())
+            System.out.println(c);
 
         //enrolmenuestionCourse();
         //enrolment.viewStudent();
         //enrolment.viewSem();
+
+        Menu menu = new Menu();
+        menu.createMenu();
 
     }
 }

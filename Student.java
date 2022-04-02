@@ -4,6 +4,10 @@ class Student{
     private String StudentName;
     private String BirthDate;
 
+    public Student() {
+
+    }
+
     public String getStudentID() {
         return StudentID;
     }

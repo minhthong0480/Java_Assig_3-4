@@ -152,20 +152,22 @@ public class Enrolmanager implements StudentEnrolmentManager {
     public void viewCourse(Student s, String sem){
 
         //print all course for input student
+        ArrayList<Course> tempCourseList = new ArrayList<>();
         System.out.println("List of Course: ");
         for(StudentEnrolment se : studentEnrolmentList){
             if (se.getStudent().getStudentID().equalsIgnoreCase(s.getStudentID()) &&
                     se.getSemester().equalsIgnoreCase(sem)){
                 System.out.println(se.getCourse());
+                tempCourseList.add(se.getCourse());
             }
         }
 
         //write to csv all course for 1 student
         FileWriter file = null;
         try {
-            file = new FileWriter("Java_Assig_3-4/Test.csv");
+            file = new FileWriter("Test.csv");
             file.append("\n");
-            Iterator<Course> printCourseforStudent = courseList.iterator();
+            Iterator<Course> printCourseforStudent = tempCourseList.iterator();
             file.append("All of the course in semester \n" + sem);
             while(printCourseforStudent.hasNext())
             {
@@ -189,19 +191,21 @@ public class Enrolmanager implements StudentEnrolmentManager {
     public void viewStudent(Course c, String sem){
 
         //print all student for input course
+        ArrayList<Student> tempStudentList = new ArrayList<>();
         System.out.println("List of student: ");
         for(StudentEnrolment se : studentEnrolmentList){
             if (se.getCourse().getCourseID().equalsIgnoreCase(c.getCourseID()) &&
                     se.getSemester().equalsIgnoreCase(sem)){
                 System.out.println(se.getStudent());
+                tempStudentList.add(se.getStudent());
             }
         }
 
         FileWriter file = null;
         try {
-            file = new FileWriter("Java_Assig_3-4/Test.csv");
+            file = new FileWriter("Test.csv");
             file.append("\n");
-            Iterator<Student> printStudentofOneCourse = studentList.iterator();
+            Iterator<Student> printStudentofOneCourse = tempStudentList.iterator();
             file.append("All of the course in semester \n" + sem);
             while(printStudentofOneCourse.hasNext())
             {
@@ -222,20 +226,21 @@ public class Enrolmanager implements StudentEnrolmentManager {
     }
 
     public void viewSem(String sem) {
-
+        ArrayList<Course> tempCourseList = new ArrayList<>();
         System.out.println("List of Course in Semester: ");
         for (StudentEnrolment se : studentEnrolmentList) {
             if (se.getSemester().equalsIgnoreCase(sem)) {
                     System.out.println(se.getCourse());
+                    tempCourseList.add(se.getCourse());
                 }
             }
 
 //write all course in one semester
         FileWriter file = null;
         try {
-            file = new FileWriter("Java_Assig_3-4/Test.csv");
+            file = new FileWriter("Test.csv");
             file.append("\n");
-            Iterator<Course> printCourseInSem = courseList.iterator();
+            Iterator<Course> printCourseInSem = tempCourseList.iterator();
             file.append("All of the course in semester \n" + sem);
             while(printCourseInSem.hasNext())
             {
@@ -248,7 +253,6 @@ public class Enrolmanager implements StudentEnrolmentManager {
                 file.append(",");
                 file.append("\n");
                 file.append("");
-
             }
 
             file.close();

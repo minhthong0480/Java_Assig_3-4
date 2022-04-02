@@ -3,6 +3,10 @@ class Course{
     private String CourseName;
     private int NumberofCredit;
 
+    public Course() {
+
+    }
+
     public String getCourseID() {
         return CourseID;
     }
