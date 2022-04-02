@@ -256,7 +256,8 @@ public class Enrolmanager implements StudentEnrolmentManager {
             file = new FileWriter("Test.csv");
             file.append("\n");
             Iterator<Course> printCourseInSem = tempCourseList.iterator();
-            file.append("All of the course in semester \n" + sem);
+            file.append("All of the course in semester " + sem +":");
+            file.append("\n");
             while(printCourseInSem.hasNext())
             {
                 Course c = (Course)printCourseInSem.next();
