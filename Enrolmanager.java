@@ -225,15 +225,30 @@ public class Enrolmanager implements StudentEnrolmentManager {
         }
     }
 
+    public boolean CourseIsNotDup(Course tempCourse, ArrayList<Course> tempCourseList){
+        for(Course course : tempCourseList){
+            if(tempCourse.getCourseID().equalsIgnoreCase(course.getCourseID())){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void viewSem(String sem) {
         ArrayList<Course> tempCourseList = new ArrayList<>();
         System.out.println("List of Course in Semester: ");
+
         for (StudentEnrolment se : studentEnrolmentList) {
-            if (se.getSemester().equalsIgnoreCase(sem)) {
-                    System.out.println(se.getCourse());
+            if(CourseIsNotDup(se.getCourse(), tempCourseList)){
+                if(se.getSemester().equalsIgnoreCase(sem)){
                     tempCourseList.add(se.getCourse());
                 }
             }
+        }
+        for(Course c : tempCourseList){
+            System.out.println(c);
+        }
+
 
 //write all course in one semester
         FileWriter file = null;
